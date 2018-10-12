@@ -30,10 +30,12 @@ Game::Game(MainWindow& wnd)
 	cam(ct),
 	e1(Star::Make(150.0f, 75.0f, 12), Vec2{ 40,200 })
 {
-	entities.emplace_back(Star::Make(100.0f, 50.0f, 5), Vec2({ 0.0f, 0.0f }));
-	entities.emplace_back(Star::Make(100.0f, 50.0f, 6), Vec2({ -200.0f, 200.0f }));
-	entities.emplace_back(Star::Make(100.0f, 50.0f, 7), Vec2({ 0.0f, -200.0f }));
-	entities.emplace_back(Star::Make(100.0f, 50.0f, 8), Vec2({ 300.0f, -100.0f }));
+	entities.emplace_back(Star::Make(100.0f, 50.0f, 3), Vec2({ -180.0f, -40.0f }));
+	entities.emplace_back(Star::Make(90.0f, 30.0f, 4), Vec2({ 0.0f, 160.0f }));
+	entities.emplace_back(Star::Make(70.0f, 50.0f, 5), Vec2({ 0.0f, 0.0f }));
+	entities.emplace_back(Star::Make(100.0f, 20.0f, 6), Vec2({ -200.0f, 200.0f }));
+	entities.emplace_back(Star::Make(60.0f, 40.0f, 7), Vec2({ 0.0f, -200.0f }));
+	entities.emplace_back(Star::Make(120.0f, 10.0f, 8), Vec2({ 300.0f, -100.0f }));
 	entities.emplace_back(Star::Make(100.0f, 50.0f, 9), Vec2({ 200.0f, 100.0f }));
 }
 
@@ -65,18 +67,18 @@ void Game::UpdateModel()
 		cam.MoveBy({speed, 0.0f });
 	}
 
-	//while (!wnd.mouse.IsEmpty())
-	//{
-	//	const auto e = wnd.mouse.Read();
-	//	if (e.GetType() == Mouse::Event::Type::WheelUp)
-	//	{
-	//		e1.SetScale(e1.GetScale() * 1.05f);
-	//	}
-	//	else if (e.GetType() == Mouse::Event::Type::WheelDown)
-	//	{
-	//		e1.SetScale(e1.GetScale() / 1.05f);
-	//	}
-	//}
+	while (!wnd.mouse.IsEmpty())
+	{
+		const auto e = wnd.mouse.Read();
+		if (e.GetType() == Mouse::Event::Type::WheelUp)
+		{
+			cam.SetScale(cam.GetScale() * 1.05f);
+		}
+		else if (e.GetType() == Mouse::Event::Type::WheelDown)
+		{
+			cam.SetScale(cam.GetScale() / 1.05f);
+		}
+	}
 	
 }
 
