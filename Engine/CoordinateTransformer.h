@@ -3,19 +3,19 @@
 #include "Graphics.h"
 #include "Vec2.h"
 #include <vector>
+#include "Drawable.h"
 
 class CoordinateTransformer {
 public:
   CoordinateTransformer(Graphics &gfx) : gfx(gfx) {}
-  void DrawClosedPolyline(std::vector<Vec2> poly, Color c) {
-    Vec2 offset = {float(Graphics::ScreenWidth / 2),
-                   float(Graphics::ScreenHeight / 2)};
-    for (auto &v : poly) {
-      v.y *= -1;
-      v += offset;
-    }
 
-    gfx.DrawClosedPolyline(poly, c);
+  void Draw(Drawable& dw) const
+  {
+    const Vec2 offset = {float(Graphics::ScreenWidth / 2),float(Graphics::ScreenHeight / 2)};
+ 
+	 dw.ScaleIndependent(1.0f, -1.0f);
+	 dw.Translate(offset);
+	 dw.Render(gfx);
   }
 
 private:

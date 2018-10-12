@@ -92,7 +92,7 @@ void Game::ComposeFrame()
 	//ct.DrawClosedPolyline(e1.GetPolyLine(), Colors::Green);
 	for (auto e : entities)
 	{
-		cam.DrawClosedPolyline(e.GetPolyLine(), Colors::Magenta);
+		cam.Draw(e.GetDrawable());
 	}
 
 }

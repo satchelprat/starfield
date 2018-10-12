@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoordinateTransformer.h"
+#include "Drawable.h"
 
 class Camera
 {
@@ -28,14 +29,11 @@ public:
 	{
 		return scale;
 	}
-	void DrawClosedPolyline(std::vector<Vec2> poly, Color c) {
-	
-		for (auto &v : poly) {
-			
-			v -= pos;
-			v *= scale;
-		}
-		ct.DrawClosedPolyline(std::move(poly), c);
+	void Draw(Drawable& dw) 
+	{
+			dw.Translate(-pos);  //???? Not positive?
+			dw.Scale(scale);
+			ct.Draw(dw);
 	}
 private:
 	Vec2 pos = { 0.0f, 0.0f };
