@@ -27,7 +27,7 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	ct(gfx),
-	e1(Star::Make(150.0f, 75.0f))
+	e1(Star::Make(150.0f, 75.0f, 12))
 {
 }
 
@@ -58,6 +58,20 @@ void Game::UpdateModel()
 	{
 		e1.TranslateBy({speed, 0.0f });
 	}
+
+	while (!wnd.mouse.IsEmpty())
+	{
+		const auto e = wnd.mouse.Read();
+		if (e.GetType() == Mouse::Event::Type::WheelUp)
+		{
+			e1.SetScale(e1.GetScale() * 1.05f);
+		}
+		else if (e.GetType() == Mouse::Event::Type::WheelDown)
+		{
+			e1.SetScale(e1.GetScale() / 1.05f);
+		}
+	}
+	
 }
 
 void Game::ComposeFrame()
