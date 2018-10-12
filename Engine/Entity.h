@@ -6,7 +6,7 @@
 class Entity {
 
 public:
-	Entity(std::vector<Vec2> model) : model(std::move(model)) {}
+	Entity(std::vector<Vec2> model, const Vec2 _pos = { 0,0 }) : model(std::move(model)), pos(_pos) {}
 	Vec2 GetPos() const { return pos; }
 	void SetPos(const Vec2 &_pos) { pos = _pos; }
 	float GetScale() const { return scale; }

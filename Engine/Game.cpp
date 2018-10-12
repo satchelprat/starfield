@@ -27,8 +27,14 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	ct(gfx),
-	e1(Star::Make(150.0f, 75.0f, 12))
+	cam(ct),
+	e1(Star::Make(150.0f, 75.0f, 12), Vec2{ 40,200 })
 {
+	entities.emplace_back(Star::Make(100.0f, 50.0f, 5), Vec2({ 0.0f, 0.0f }));
+	entities.emplace_back(Star::Make(100.0f, 50.0f, 6), Vec2({ -200.0f, 200.0f }));
+	entities.emplace_back(Star::Make(100.0f, 50.0f, 7), Vec2({ 0.0f, -200.0f }));
+	entities.emplace_back(Star::Make(100.0f, 50.0f, 8), Vec2({ 300.0f, -100.0f }));
+	entities.emplace_back(Star::Make(100.0f, 50.0f, 9), Vec2({ 200.0f, 100.0f }));
 }
 
 void Game::Go()
@@ -44,33 +50,33 @@ void Game::UpdateModel()
 	const float speed = 5.0f;
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
-		e1.TranslateBy({ 0.0f, -speed });
+		cam.MoveBy({ 0.0f, -speed });
 	}
 	if (wnd.kbd.KeyIsPressed(VK_UP))
 	{
-		e1.TranslateBy({ 0.0f, speed });
+		cam.MoveBy({ 0.0f, speed });
 	}
 	if (wnd.kbd.KeyIsPressed(VK_LEFT))
 	{
-		e1.TranslateBy({-speed, 0.0f });
+		cam.MoveBy({-speed, 0.0f });
 	}
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
-		e1.TranslateBy({speed, 0.0f });
+		cam.MoveBy({speed, 0.0f });
 	}
 
-	while (!wnd.mouse.IsEmpty())
-	{
-		const auto e = wnd.mouse.Read();
-		if (e.GetType() == Mouse::Event::Type::WheelUp)
-		{
-			e1.SetScale(e1.GetScale() * 1.05f);
-		}
-		else if (e.GetType() == Mouse::Event::Type::WheelDown)
-		{
-			e1.SetScale(e1.GetScale() / 1.05f);
-		}
-	}
+	//while (!wnd.mouse.IsEmpty())
+	//{
+	//	const auto e = wnd.mouse.Read();
+	//	if (e.GetType() == Mouse::Event::Type::WheelUp)
+	//	{
+	//		e1.SetScale(e1.GetScale() * 1.05f);
+	//	}
+	//	else if (e.GetType() == Mouse::Event::Type::WheelDown)
+	//	{
+	//		e1.SetScale(e1.GetScale() / 1.05f);
+	//	}
+	//}
 	
 }
 
@@ -81,6 +87,10 @@ void Game::ComposeFrame()
 		gfx.DrawLine( { 10.0f,10.0f },(Vec2)wnd.mouse.GetPos(),Colors::Yellow );
 	}
 
-	ct.DrawClosedPolyline(e1.GetPolyLine(), Colors::Green);
+	//ct.DrawClosedPolyline(e1.GetPolyLine(), Colors::Green);
+	for (auto e : entities)
+	{
+		cam.DrawClosedPolyline(e.GetPolyLine(), Colors::Magenta);
+	}
 
 }
