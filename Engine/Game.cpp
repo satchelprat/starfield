@@ -22,10 +22,12 @@
 #include "Game.h"
 #include "Star.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd )
+	wnd(wnd),
+	gfx(wnd),
+	ct(gfx),
+	e1(Star::Make(150.0f, 75.0f))
 {
 }
 
@@ -39,15 +41,32 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	const float speed = 5.0f;
+	if (wnd.kbd.KeyIsPressed(VK_DOWN))
+	{
+		e1.TranslateBy({ 0.0f, -speed });
+	}
+	if (wnd.kbd.KeyIsPressed(VK_UP))
+	{
+		e1.TranslateBy({ 0.0f, speed });
+	}
+	if (wnd.kbd.KeyIsPressed(VK_LEFT))
+	{
+		e1.TranslateBy({-speed, 0.0f });
+	}
+	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
+	{
+		e1.TranslateBy({speed, 0.0f });
+	}
 }
 
 void Game::ComposeFrame()
 {
 	if( wnd.mouse.LeftIsPressed() )
 	{
-		gfx.DrawLine( { 100.0f,100.0f },(Vec2)wnd.mouse.GetPos(),Colors::Yellow );
+		gfx.DrawLine( { 10.0f,10.0f },(Vec2)wnd.mouse.GetPos(),Colors::Yellow );
 	}
-	//gfx.DrawClosedPolyline( { {10.0f,10.0f},{100.0f,10.0f},{100.0f,100.0f} ,{10.0f,100.0f} },Colors::Red );
-	gfx.DrawClosedPolyline(Star::Make(150.0f, 75.0f), Colors::Green);
+
+	ct.DrawClosedPolyline(e1.GetPolyLine(), Colors::Green);
 
 }

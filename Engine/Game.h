@@ -23,6 +23,8 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "CoordinateTransformer.h"
+#include "Entity.h"
 
 class Game
 {
@@ -40,6 +42,9 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+	CoordinateTransformer ct;
+	Entity e1;
+	
 	/********************************/
 	/*  User Variables              */
 	/********************************/

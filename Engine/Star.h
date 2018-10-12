@@ -20,9 +20,8 @@ public:
 			star.emplace_back(
 				rad * cos(float(i) * dTheta),
 				rad * sin(float(i) * dTheta)
-			);
+				);
 		}
-
-
-}
+		return star;
+	}
 };
