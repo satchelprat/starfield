@@ -13,7 +13,7 @@ public:
 	{
 		std::vector<Vec2> star;
 		star.reserve(nFlares * 2);
-		const float dTheta = 2.0 * M_PI / float(nFlares * 2);
+		const float dTheta = 2.0 * (float)M_PI / float(nFlares * 2);
 		for (int i = 0; i < nFlares * 2; i++)
 		{
 			const float rad = (i % 2 == 0) ? outerRadius : innerRadius;

@@ -45,7 +45,6 @@ private:
 	Graphics gfx;
 	CoordinateTransformer ct;
 	Camera cam;
-	Entity e1;
 	std::vector<Entity> entities;
 	
 	/********************************/

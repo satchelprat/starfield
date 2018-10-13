@@ -31,7 +31,7 @@ public:
 	}
 	void Draw(Drawable& dw) 
 	{
-			dw.Translate(-pos);  //???? Not positive?
+			dw.Translate(-pos);
 			dw.Scale(scale);
 			ct.Draw(dw);
 	}

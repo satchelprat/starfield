@@ -27,10 +27,10 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	ct(gfx),
-	cam(ct),
-	e1(Star::Make(150.0f, 75.0f, 12), Vec2{ 40,200 })
+	cam(ct)
+	
 {
-	entities.emplace_back(Star::Make(100.0f, 50.0f, 3), Vec2({ -180.0f, -40.0f }));
+	entities.emplace_back(Star::Make(100.0f, 50.0f, 3), Vec2({ -180.0f, -40.0f }), Colors::Red);
 	entities.emplace_back(Star::Make(90.0f, 30.0f, 4), Vec2({ 0.0f, 160.0f }));
 	entities.emplace_back(Star::Make(70.0f, 50.0f, 5), Vec2({ 0.0f, 0.0f }));
 	entities.emplace_back(Star::Make(100.0f, 20.0f, 6), Vec2({ -200.0f, 200.0f }));
