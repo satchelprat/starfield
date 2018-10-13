@@ -3,7 +3,7 @@
 #include "Star.h"
 #include "Entity.h"
 
-class Starfield : Entity
+class Starfield : public Entity
 {
 public:
 	

@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "CoordinateTransformer.h"
 #include "Entity.h"
+#include "StarEntity.h"
 #include "Camera.h"
 
 class Game
@@ -46,6 +47,16 @@ private:
 	CoordinateTransformer ct;
 	Camera cam;
 	std::vector<Entity> entities;
+	std::vector<StarEntity> starfield;
+	static constexpr int nStars = 500;
+	static constexpr float worldWidth = 10000.0f;
+	static constexpr float worldHeight = 7500.0f;
+	static constexpr float starInnerRadiusMin = 30.0f;
+	static constexpr float starInnerRadiusMax = 80.0f;
+	static constexpr float starOuterRadiusMin = 80.0f;
+	static constexpr float starOuterRadiusMax = 450.0f;
+	static constexpr int starMinFlares = 3;
+	static constexpr int starMaxFlares = 12;
 	
 	/********************************/
 	/*  User Variables              */
