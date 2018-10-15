@@ -27,6 +27,7 @@
 #include "Entity.h"
 #include "StarEntity.h"
 #include "Camera.h"
+#include "Camcontroller.h"
 
 class Game
 {
@@ -45,19 +46,23 @@ private:
 	MainWindow& wnd;
 	Graphics gfx;
 	CoordinateTransformer ct;
-	Camera cam;
+	Camera cam; 
+	CamController camCtl;
 	std::vector<Entity> entities;
 	std::vector<StarEntity> starfield;
-	static constexpr int nStars = 500;
+	static constexpr int nStars = 400;
 	static constexpr float worldWidth = 10000.0f;
 	static constexpr float worldHeight = 7500.0f;
 	static constexpr float starInnerRadiusMin = 30.0f;
 	static constexpr float starInnerRadiusMax = 80.0f;
-	static constexpr float starOuterRadiusMin = 80.0f;
-	static constexpr float starOuterRadiusMax = 450.0f;
+	static constexpr float starOuterRadiusMin = 50.0f;
+	static constexpr float starOuterRadiusMax = 300.0f;
 	static constexpr int starMinFlares = 3;
 	static constexpr int starMaxFlares = 12;
-	
+	static constexpr float pulseMin = 0.25f;
+	static constexpr float pulseMax = 1.0f;
+	static constexpr float pulseRatio = 0.5f;
+		
 	/********************************/
 	/*  User Variables              */
 	/********************************/

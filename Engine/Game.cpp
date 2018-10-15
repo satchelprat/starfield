@@ -28,7 +28,8 @@ Game::Game(MainWindow& wnd)
 	wnd(wnd),
 	gfx(wnd),
 	ct(gfx),
-	cam(ct)
+	cam(ct),
+	camCtl(wnd.mouse, cam)
 
 {
 	std::mt19937 rng(std::random_device{}());
@@ -36,6 +37,7 @@ Game::Game(MainWindow& wnd)
 	std::uniform_real_distribution<float> yDist(-worldHeight / 2.0f, worldHeight / 2.0f);
 	std::uniform_real_distribution<float> radOutDist(starOuterRadiusMin, starOuterRadiusMax);
 	std::uniform_real_distribution<float> radInDist(starInnerRadiusMin, starInnerRadiusMax);
+	std::uniform_real_distribution<float> pulseDist(pulseMin, pulseMax);
 	std::uniform_int_distribution<size_t> flareDist(starMinFlares, starMaxFlares);
 	const Color colors[] = { Colors::Red,Colors::White,Colors::Blue,Colors::Cyan,Colors::Yellow,Colors::Magenta,Colors::Green };
 	std::uniform_int_distribution<size_t> colorDist(0, std::end(colors) - std::begin(colors));
@@ -56,7 +58,8 @@ Game::Game(MainWindow& wnd)
 		const auto inRad = radInDist(rng);
 		const int nFlares = flareDist(rng);
 		const Color color = colors[colorDist(rng)];
-		starfield.emplace_back(outRad, inRad, nFlares, pos, color);
+		const float pulse = pulseDist(rng);
+		starfield.emplace_back(outRad, inRad, nFlares, pos, color, pulse);
 	}  
 
 
@@ -79,7 +82,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	const float speed = 50.0f;
+	/*const float speed = 50.0f;
 	if (wnd.kbd.KeyIsPressed(VK_DOWN))
 	{
 		cam.MoveBy({ 0.0f, -speed });
@@ -95,36 +98,15 @@ void Game::UpdateModel()
 	if (wnd.kbd.KeyIsPressed(VK_RIGHT))
 	{
 		cam.MoveBy({ speed, 0.0f });
-	}
+	}*/
 
-	while (!wnd.mouse.IsEmpty())
-	{
-		const auto e = wnd.mouse.Read();
-		if (e.GetType() == Mouse::Event::Type::WheelUp)
-		{
-			cam.SetScale(cam.GetScale() * 1.20f);
-		}
-		else if (e.GetType() == Mouse::Event::Type::WheelDown)
-		{
-			cam.SetScale(cam.GetScale() / 1.20f);
-		}
-	}
-	if (wnd.mouse.LeftIsPressed())
-	{
-		const Vec2 pointerPos(float(wnd.mouse.GetPosX()), float(-wnd.mouse.GetPosY()));
+	camCtl.Update();
 
-		cam.MoveTo(pointerPos);  //not right at all, but will return to this
-	}
 }
 
 void Game::ComposeFrame()
 {
-	if (wnd.mouse.LeftIsPressed())
-	{
-		gfx.DrawLine({ 10.0f,10.0f }, (Vec2)wnd.mouse.GetPos(), Colors::Yellow);
-	}
-
-	//ct.DrawClosedPolyline(e1.GetPolyLine(), Colors::Green);
+	
 	for (auto e : starfield)
 	{
 		cam.Draw(e.GetDrawable());
