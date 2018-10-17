@@ -56,7 +56,7 @@ Game::Game(MainWindow& wnd)
 		}
 
 		const auto inRad = radInDist(rng);
-		const int nFlares = flareDist(rng);
+		const size_t nFlares = flareDist(rng);
 		const Color color = colors[colorDist(rng)];
 		const float pulse = pulseDist(rng);
 		starfield.emplace_back(outRad, inRad, nFlares, pos, color, pulse);

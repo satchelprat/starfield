@@ -9,7 +9,7 @@
 class Star
 {
 public:
-	static std::vector<Vec2> Make(float outerRadius, float innerRadius, int nFlares = 5)
+	static std::vector<Vec2> Make(float outerRadius, float innerRadius, size_t nFlares = 5)
 	{
 		std::vector<Vec2> star;
 		star.reserve(nFlares * 2);
