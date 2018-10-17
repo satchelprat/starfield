@@ -75,9 +75,6 @@
     <ClInclude Include="Drawable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Starfield.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StarEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>

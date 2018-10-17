@@ -5,8 +5,9 @@
 
 class Drawable {
 public:
-	Drawable(Color _c)
+	Drawable(std::vector<Vec2> _model, Color _c)
 		:
+		model(std::move(_model)),
 		c(_c)
 	{}
 	void Translate(const Vec2& _translation) 
@@ -27,7 +28,7 @@ public:
 		translation.x *= _scaleX;
 		translation.y *= _scaleY;
 	}
-	void Render(std::vector<Vec2> model, Graphics& gfx)
+	void Render(Graphics& gfx)
 	{
 		for (auto& v : model)  //here's where we apply the transforms to all vertices
 		{
@@ -38,10 +39,11 @@ public:
 		gfx.DrawClosedPolyline(model, c);
 	}
 private:
-	
+	std::vector<Vec2> model;
 	Vec2 translation = { 0.0f, 0.0f };
 	float scaleX = 1.0f;
 	float scaleY = 1.0f;
+	//float scale = 1.0f;
 	Color c;
 
 };

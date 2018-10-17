@@ -32,6 +32,11 @@ public:
 		scale = _scale;
 	}
 
+	std::vector<Vec2> GetModel() const
+	{
+		return model;
+	}
+
 	void TranslateBy(const Vec2 &offset) 
 	{ 
 		pos += offset;
@@ -39,7 +44,7 @@ public:
 
 	Drawable GetDrawable() const
 	{
-		Drawable dw(model, c);
+		Drawable dw(c);
 		dw.Scale(scale);
 		dw.Translate(pos);
 		return dw;

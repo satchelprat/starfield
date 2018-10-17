@@ -48,7 +48,7 @@ private:
 	CoordinateTransformer ct;
 	Camera cam; 
 	CamController camCtl;
-	std::vector<Entity> entities;
+	//std::vector<Entity> entities;
 	std::vector<StarEntity> starfield;
 	static constexpr int nStars = 400;
 	static constexpr float worldWidth = 10000.0f;

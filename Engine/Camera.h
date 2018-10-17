@@ -29,11 +29,11 @@ public:
 	{
 		return scale;
 	}
-	void Draw(Drawable& dw) 
+	void Draw(std::vector<Vec2> model, Drawable& dw)
 	{
 			dw.Translate(-pos);
 			dw.Scale(scale);
-			ct.Draw(dw);
+			ct.Draw(model, dw);
 	}
 private:
 	Vec2 pos = { 0.0f, 0.0f };

@@ -109,7 +109,7 @@ void Game::ComposeFrame()
 	
 	for (auto e : starfield)
 	{
-		cam.Draw(e.GetDrawable());
+		cam.Draw(e.GetModel(), e.GetDrawable());
 	}
 
 }
