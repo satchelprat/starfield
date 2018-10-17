@@ -50,7 +50,7 @@ private:
 	CamController camCtl;
 	//std::vector<Entity> entities;
 	std::vector<StarEntity> starfield;
-	static constexpr int nStars = 400;
+	static constexpr int nStars = 200;
 	static constexpr float worldWidth = 10000.0f;
 	static constexpr float worldHeight = 7500.0f;
 	static constexpr float starInnerRadiusMin = 30.0f;
