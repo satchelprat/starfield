@@ -37,6 +37,13 @@ public:
 		return model;
 	}
 
+	std::vector<Vec2>* GetModelPtr()
+	{
+		std::vector<Vec2>* ptr;
+		ptr = &model;
+		return ptr;
+	}
+
 	void TranslateBy(const Vec2 &offset) 
 	{ 
 		pos += offset;
