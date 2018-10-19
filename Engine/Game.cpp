@@ -80,7 +80,7 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	
-	for (auto e : starfield)
+	for (auto& e : starfield)
 	{
 		cam.Draw(e.GetModelPtr(), e.GetDrawable());
 	}

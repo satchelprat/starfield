@@ -329,6 +329,35 @@ void Graphics::DrawClosedPolyline(const std::vector<Vec2> &verts, Color c) {
   DrawLine(verts.back(), verts.front(), c);
 }
 
+void Graphics::DrawClosedPolyline(const std::vector<Vec2>& verts, float scaleX, float scaleY, Vec2 translation, Color c)
+{
+   auto start = *verts.begin();
+   start.x *= scaleX;
+   start.y *= scaleY;
+   start += translation;
+
+   auto end = *std::prev(verts.end());
+   end.x *= scaleX;
+   end.y *= scaleY;
+   end += translation;
+
+   for (auto i = verts.begin(); i != std::prev(verts.end()); i++) {
+      auto i2start = *i;		
+      i2start.x *= scaleX;		//should be able to do all this with a lambda?
+      i2start.y *= scaleY;		//	
+      i2start += translation; //
+
+      auto i2end = *std::next(i);
+      i2end.x *= scaleX;
+      i2end.y *= scaleY;
+      i2end += translation;
+   
+      DrawLine(i2start, i2end, c);
+   }
+   
+   DrawLine(end, start, c);
+}
+
 //////////////////////////////////////////////////
 //           Graphics Exception
 Graphics::Exception::Exception(HRESULT hr, const std::wstring &note,

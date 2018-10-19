@@ -27,16 +27,11 @@ public:
 		translation.x *= _scaleX;
 		translation.y *= _scaleY;
 	}
-	void PRender(std::vector<Vec2>* model, Graphics& gfx)
+	void PRender(const std::vector<Vec2>& model, Graphics& gfx)
 	{
-		for (auto& v : *model)
-		{
-			v.x *= scaleX;
-			v.y *= scaleY;
-			v += translation;
-		}
-		gfx.DrawClosedPolyline(*model, c);
+		gfx.DrawClosedPolyline(model,scaleX, scaleY, translation, c);
 	}
+
 	//void Render(std::vector<Vec2> model, Graphics& gfx)
 	//{
 	//	for (auto& v : model)  //here's where we apply the transforms to all vertices

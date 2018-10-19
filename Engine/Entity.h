@@ -37,9 +37,11 @@ public:
 		return model;
 	}
 
-	std::vector<Vec2>* GetModelPtr()
+	const std::vector<Vec2>& GetModelPtr()
 	{
-		return &model;
+		const std::vector<Vec2>&ref = model;
+		return ref;
+		//return model;
 	}
 
 	void TranslateBy(const Vec2 &offset) 
@@ -58,6 +60,6 @@ public:
 private:
 	float scale = 1.0f;
 	Vec2 pos = { 0.0f, 0.0f };
-	std::vector<Vec2> model;
+	const std::vector<Vec2> model;
 	Color c;
 };
